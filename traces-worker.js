@@ -21,7 +21,7 @@ export default {
 
       const response = await fetch(N8N_WEBHOOK, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",  "X-Api-Key": "honlaphutesztKulcs2626" },
         body: JSON.stringify({ message, sessionId, botId })
       });
 
