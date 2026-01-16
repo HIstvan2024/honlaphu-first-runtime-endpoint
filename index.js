@@ -1,5 +1,5 @@
 const N8N_WEBHOOK = "https://n8n.srv1254407.hstgr.cloud/webhook/f522d3c0-0cef-45de-bf2b-1abec3d8cb1c";
-const API_KEY = "honlaphonlaphukulcsTeszt2"; // CSERÉLD KI!
+const API_KEY = "apikulcs26sclukipa"; // CSERÉLD KI!
 
 export default {
   async fetch(request) {
@@ -18,8 +18,7 @@ export default {
     }
 
     try {
-      const body = await request.json();
-      const { message, sessionId, botId } = body;
+      const { message, sessionId, botId } = await request.json();
 
       const response = await fetch(N8N_WEBHOOK, {
         method: "POST",
@@ -30,23 +29,9 @@ export default {
         body: JSON.stringify({ message, sessionId, botId })
       });
 
-      if (!response.ok) {
-        return new Response(JSON.stringify({ 
-          error: "N8N hiba", 
-          status: response.status,
-          statusText: response.statusText
-        }), {
-          status: response.status,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-          }
-        });
-      }
+      const text = await response.text();
 
-      const data = await response.json();
-
-      return new Response(JSON.stringify(data), {
+      return new Response(JSON.stringify({ response: text }), {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*"
@@ -54,10 +39,7 @@ export default {
       });
 
     } catch (error) {
-      return new Response(JSON.stringify({ 
-        error: error.message,
-        stack: error.stack 
-      }), {
+      return new Response(JSON.stringify({ error: error.message }), {
         status: 500,
         headers: {
           "Content-Type": "application/json",
