@@ -1,5 +1,5 @@
 {
-  "name": "traces-runtime",
+  "name": "honlaphu-first-runtime-endpoint-reverse-proxy",
   "compatibility_date": "2026-01-16",
   "main": "index.js"
 }
