@@ -1,5 +1,5 @@
 const N8N_WEBHOOK = "https://n8n.srv1254407.hstgr.cloud/webhook/f522d3c0-0cef-45de-bf2b-1abec3d8cb1c";
-const API_KEY = "honlaphutesztKulcs2626";
+const API_KEY = "honlaphonlaphukulcsTeszt26";
 
 export default {
   async fetch(request) {
