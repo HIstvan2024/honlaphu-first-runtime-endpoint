@@ -19,6 +19,7 @@ export default {
 
     try {
       const { message, sessionId, botId } = await request.json();
+      const origin = request.headers.get("Origin") || request.headers.get("Referer") || "unknown";
 
       const response = await fetch(N8N_WEBHOOK, {
         method: "POST",
@@ -26,7 +27,7 @@ export default {
           "Content-Type": "application/json",
           "X-Api-Key": API_KEY
         },
-        body: JSON.stringify({ message, sessionId, botId })
+        body: JSON.stringify({ message, sessionId, botId, origin })
       });
 
       const text = await response.text();
