@@ -1,4 +1,5 @@
 const N8N_WEBHOOK = "https://n8n.srv1254407.hstgr.cloud/webhook/f522d3c0-0cef-45de-bf2b-1abec3d8cb1c";
+const API_KEY = "honlaphutesztKulcs2626"; // CSERÉLD KI!
 
 export default {
   async fetch(request) {
@@ -21,7 +22,10 @@ export default {
 
       const response = await fetch(N8N_WEBHOOK, {
         method: "POST",
-        headers: { "Content-Type": "application/json",  "X-Api-Key": "honlaphutesztKulcs2626" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-Api-Key": API_KEY
+        },
         body: JSON.stringify({ message, sessionId, botId })
       });
 
