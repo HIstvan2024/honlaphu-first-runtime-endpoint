@@ -1,5 +1,5 @@
 const N8N_WEBHOOK = "https://n8n.srv1254407.hstgr.cloud/webhook/f522d3c0-0cef-45de-bf2b-1abec3d8cb1c";
-const API_KEY = "apikulcs26sclukipa"; // CSERÉLD KI!
+const API_KEY = "apikulcs26sclukipa";
 
 export default {
   async fetch(request) {
@@ -31,7 +31,22 @@ export default {
 
       const text = await response.text();
 
-      return new Response(JSON.stringify({ response: text }), {
+      // Chunk-ok összerakása
+      let fullResponse = "";
+      const lines = text.split("\n").filter(line => line.trim());
+      
+      for (const line of lines) {
+        try {
+          const chunk = JSON.parse(line);
+          if (chunk.content) {
+            fullResponse += chunk.content;
+          }
+        } catch {
+          // Ha nem JSON, skip
+        }
+      }
+
+      return new Response(JSON.stringify({ response: fullResponse }), {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*"
